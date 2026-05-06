@@ -1,1 +1,116 @@
-﻿
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>CleanFloor Beta</title>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+  <main class="app">
+
+    <!-- HEADER / BRAND -->
+    <div class="brand">
+      <img src="img/CleanFloor.png" alt="CleanFloor Logo" />
+
+      <div class="brand-name">
+        <strong>Clean</strong>Floor
+      </div>
+
+      <div class="beta">BETA</div>
+    </div>
+
+    <!-- TITLE -->
+    <h1>Turnos de limpieza</h1>
+
+    <p class="subtitle">
+      Introduce tu nombre (Alberto, Victor, Irene o Murci) y una fecha.
+      Te diré qué parte de la casa te toca según el ciclo de 4 semanas.
+    </p>
+
+    <!-- NOMBRE -->
+    <div class="field">
+      <label for="nombre">Nombre</label>
+
+      <select id="nombre">
+        <option value="Alberto">Alberto</option>
+        <option value="Victor">Víctor</option>
+        <option value="Irene">Irene</option>
+        <option value="Murci">Murci</option>
+      </select>
+    </div>
+
+    <!-- FECHA -->
+    <div class="field">
+      <label for="fecha">Fecha</label>
+
+      <input id="fecha" type="date" />
+    </div>
+
+    <!-- ANCLA -->
+    <div class="field">
+      <div class="anchor-grid">
+
+        <label for="anchor">
+          Anclar Semana 1 a
+        </label>
+
+        <div class="anchor-meta">
+
+          <input
+            id="anchor"
+            type="date"
+            value="2025-09-29"
+          />
+
+          <label class="switch">
+
+            <input
+              id="anchor-toggle"
+              type="checkbox"
+            />
+
+            <span class="switch-track">
+              <span class="switch-handle"></span>
+            </span>
+
+            Activar
+          </label>
+        </div>
+
+        <small>
+          Si eliges una fecha distinta y activas el anclaje,
+          esa fecha tiene prioridad. Si no, puedes marcar la
+          casilla para empezar el ciclo desde tu propia fecha.
+        </small>
+
+      </div>
+    </div>
+
+    <!-- BUTTON -->
+    <button
+      type="button"
+      onclick="calcularTurno()"
+    >
+      Calcular turno
+    </button>
+
+    <!-- RESULT -->
+    <div id="resultado"></div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>﻿
