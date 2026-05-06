@@ -113,8 +113,47 @@ function calcularTurno() {
     const nombreMostrar = nombreOficial ?? nombre;
     html += `<p>✅ A <strong>${nombreMostrar}</strong> le corresponde: <strong>${tarea}</strong>.</p>`;
     setResultado(html, "success");
+    guardarConsultaEnExist(nombreMostrar, tarea, ciclo, fechaISO, isoWeek, baseIso);
   } else {
     html += `<p>❓ Nombre no encontrado. Usa: Alberto, Irene, Víctor o Murci.</p>`;
     setResultado(html, "warning");
   }
 }
+
+function guardarConsultaEnExist(nombre, tarea, ciclo, fechaISO, isoWeek, baseIso) {
+  const ahora = new Date();
+  const fechaConsulta = ahora.toISOString().slice(0, 10);
+  const horaConsulta = ahora.toLocaleTimeString("es-ES");
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<consulta>
+  <nombre>${nombre}</nombre>
+  <tarea>${tarea}</tarea>
+  <ciclo>${ciclo}</ciclo>
+  <fechaTurno>${fechaISO}</fechaTurno>
+  <semanaISO>${isoWeek}</semanaISO>
+  <baseAnclada>${baseIso}</baseAnclada>
+  <fechaConsulta>${fechaConsulta}</fechaConsulta>
+  <horaConsulta>${horaConsulta}</horaConsulta>
+</consulta>`;
+
+  const url = `http://localhost:8080/exist/rest/db/turnos/consultas/consulta-${Date.now()}.xml`;
+
+  fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/xml",
+      "Authorization": "Basic " + btoa("admin:")
+    },
+    body: xml
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log("Consulta guardada en eXist-db");
+      } else {
+        console.error("Error al guardar en eXist-db:", response.status, response.statusText);
+      }
+    })
+    .catch(error => console.error("Error al guardar en eXist-db:", error));
+}
+
