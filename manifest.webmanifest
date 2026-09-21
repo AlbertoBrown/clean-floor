@@ -1,0 +1,19 @@
+{
+  "name": "CleanFloor",
+  "short_name": "CleanFloor",
+  "description": "Turnos de limpieza de CleanFloor.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "img/CleanFloor.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
